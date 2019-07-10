@@ -19,7 +19,7 @@ namespace WorkhoursCalculator
         {
             this.repository = repository;
             this.config = config;
-            Days = new ObservableCollection<Day>();
+            Days = new ObservableCollection<Day>(repository.Days);
             command = new Command();
             command.CanExecuteFunc = x => true;
             command.ExecuteFunc = x => Com((string)x);
@@ -36,7 +36,19 @@ namespace WorkhoursCalculator
             });
         }
 
-        public ObservableCollection<Day> Days { get; set; }
+        public ObservableCollection<Day> days;
+        public ObservableCollection<Day> Days
+        {
+            get => days;
+            set
+            {
+                if (value != null && value != days)
+                {
+                    days = value;
+                    OnPropertyChanged(nameof(Days));
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -75,8 +87,8 @@ namespace WorkhoursCalculator
         }
         public void Refresh()
         {
-            Days = new ObservableCollection<Day>(repository.Days);
-            OnPropertyChanged(nameof(Days));
+            //Days = new ObservableCollection<Day>(repository.Days);
+            //OnPropertyChanged(nameof(Days));
             OnPropertyChanged(nameof(TimeRemaining));
         }
 

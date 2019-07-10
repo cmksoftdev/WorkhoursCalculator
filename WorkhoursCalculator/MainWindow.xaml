@@ -47,7 +47,7 @@
                         <TextBlock Foreground="DarkBlue" Text="{Binding EndeString}" Grid.Column="2"></TextBlock>
                         <TextBlock Foreground="DarkRed" Text="{Binding Pause}" Grid.Column="3"></TextBlock>
                         <TextBlock Foreground="DarkBlue" Text="{Binding WorkHours}" Grid.Column="4"></TextBlock>
-                        <Label Content="{Binding Work}" Grid.Column="5"></Label>
+                        <TextBox Text="{Binding Work}" Grid.Column="5"></TextBox>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
