@@ -14,6 +14,9 @@ namespace WorkhoursCalculator
     {
         private readonly Config config;
         private readonly WorkHoursRepository repository;
+        private bool save = true;
+
+        public string Title => "Workhours Calculator " + (save ? " saved" : " UNSAVED DATA!");
 
         public MainViewModel(WorkHoursRepository repository, Config config)
         {
@@ -46,6 +49,7 @@ namespace WorkhoursCalculator
                 {
                     days = value;
                     OnPropertyChanged(nameof(Days));
+                    OnPropertyChanged(nameof(Title));
                 }
             }
         }
@@ -85,6 +89,8 @@ namespace WorkhoursCalculator
 
         public void Save()
         {
+            save = false;
+            OnPropertyChanged(nameof(Title));
             repository.Save();
         }
 
@@ -96,6 +102,7 @@ namespace WorkhoursCalculator
                 if (x.End == null)
                     x.End = DateTime.Now;
             });
+            save = false;
             Days = new ObservableCollection<Day>(repository.Days);
         }
         public void Refresh()
@@ -106,6 +113,7 @@ namespace WorkhoursCalculator
         public void Load()
         {
             repository.Load();
+            save = true;
             Days = new ObservableCollection<Day>(repository.Days);
             OnPropertyChanged(nameof(TimeRemaining));
             OnPropertyChanged(nameof(Today));
@@ -130,6 +138,7 @@ namespace WorkhoursCalculator
         public void Add()
         {
             repository.Days.Add(new Day { Date = DateTime.Now, Start=DateTime.Now });
+            save = false;
             Days = new ObservableCollection<Day>(repository.Days);
         }
 
