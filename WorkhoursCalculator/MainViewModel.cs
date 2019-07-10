@@ -103,6 +103,13 @@ namespace WorkhoursCalculator
             OnPropertyChanged(nameof(TimeRemaining));
             OnPropertyChanged(nameof(Today));
         }
+        public void Load()
+        {
+            repository.Load();
+            Days = new ObservableCollection<Day>(repository.Days);
+            OnPropertyChanged(nameof(TimeRemaining));
+            OnPropertyChanged(nameof(Today));
+        }
 
         public void Com(string str)
         {
@@ -116,6 +123,8 @@ namespace WorkhoursCalculator
                 Add();
             else if (str == "load")
                 ImportCsv();
+            else if (str == "lo")
+                Load();
         }
 
         public void Add()
