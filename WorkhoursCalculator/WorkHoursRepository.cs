@@ -56,7 +56,7 @@ namespace WorkhoursCalculator
                     {
                         Date = DateTime.Parse(values[0]),
                         Start = DateTime.Parse(values[1]),
-                        End = values[2] == "" ? (DateTime?)null : DateTime.Parse(values[2]),
+                        End = values[2] == "---" ? (DateTime?)null : DateTime.Parse(values[2]),
                         Work = values[3],
                         Pause = TimeSpan.Parse(values[4]),
                     });
