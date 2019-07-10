@@ -19,6 +19,7 @@ namespace WorkhoursCalculator
         public string DateString => Date.ToShortDateString();
         public string StartString => Start.ToShortTimeString();
         public string EndeString => Ende.ToShortTimeString();
+        public string WorkHoursString => End != null ? (WorkHours < TimeSpan.Zero ? "-" : "")+WorkHours.ToString(@"hh\:mm\:ss") : "---";
 
     }
 }

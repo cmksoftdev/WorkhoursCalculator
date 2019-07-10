@@ -26,11 +26,11 @@ namespace WorkhoursCalculator
                 using (var file = File.CreateText(config.CsvFilePath))
                 {
                     TimeSpan fulltime = TimeSpan.Zero;
-                    file.WriteLine($"Datum,Gekommen,Gegangen,ausgeführte Arbeit,Pausenzeit,Arbeitszeit,Gesamt");
+                    file.WriteLine($"Datum,Gekommen,Gegangen,Arbeit,Pausenzeit,Arbeitszeit,Gesamt");
                     foreach (var day in Days)
                     {
                         fulltime += day.WorkHours;
-                        file.WriteLine($"{day.DateString},{day.StartString},{day.End},{day.Work},{day.Pause},{day.WorkHours},{fulltime}");
+                        file.WriteLine($"{day.DateString},{day.StartString},{day.EndeString},{day.Work},{day.Pause},{day.WorkHours},{fulltime}");
                     }
                 }
             }

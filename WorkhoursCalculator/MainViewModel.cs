@@ -67,7 +67,19 @@ namespace WorkhoursCalculator
             {
                 var time = TimeSpan.FromHours(config.HoursPerWeek);
                 repository.Days.ForEach(x => time-=x.WorkHours);
-                return time.ToString();
+                return time.ToString(@"hh\:mm\:ss");
+            }
+        }
+
+        public string Today
+        {
+            get
+            {
+                var time = TimeSpan.Zero;
+                repository.Days.Where(x => x.Date.Date == DateTime.Now.Date)
+                    .ToList()
+                    .ForEach(x => time += x.WorkHours);
+                return (time < TimeSpan.Zero ? "-" : "") + time.ToString(@"hh\:mm\:ss");
             }
         }
 
@@ -78,18 +90,18 @@ namespace WorkhoursCalculator
 
         public void GoHome()
         {
-            repository.Load();
+            //repository.Load();
             repository.Days.ForEach(x =>
             {
                 if (x.End == null)
                     x.End = DateTime.Now;
             });
+            Days = new ObservableCollection<Day>(repository.Days);
         }
         public void Refresh()
         {
-            //Days = new ObservableCollection<Day>(repository.Days);
-            //OnPropertyChanged(nameof(Days));
             OnPropertyChanged(nameof(TimeRemaining));
+            OnPropertyChanged(nameof(Today));
         }
 
         public void Com(string str)
@@ -109,6 +121,7 @@ namespace WorkhoursCalculator
         public void Add()
         {
             repository.Days.Add(new Day { Date = DateTime.Now, Start=DateTime.Now });
+            Days = new ObservableCollection<Day>(repository.Days);
         }
 
         public void CreateCsv()
@@ -119,6 +132,7 @@ namespace WorkhoursCalculator
         public void ImportCsv()
         {
             repository.ImportCsv();
+            Days = new ObservableCollection<Day>(repository.Days);
         }
 
         Command command;

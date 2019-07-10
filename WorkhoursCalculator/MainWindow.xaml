@@ -46,14 +46,16 @@
                         <TextBlock Foreground="DarkRed" Text="{Binding StartString}" Grid.Column="1"></TextBlock>
                         <TextBlock Foreground="DarkBlue" Text="{Binding EndeString}" Grid.Column="2"></TextBlock>
                         <TextBlock Foreground="DarkRed" Text="{Binding Pause}" Grid.Column="3"></TextBlock>
-                        <TextBlock Foreground="DarkBlue" Text="{Binding WorkHours}" Grid.Column="4"></TextBlock>
+                        <TextBlock Foreground="DarkBlue" Text="{Binding WorkHoursString}" Grid.Column="4"></TextBlock>
                         <TextBox Text="{Binding Work}" Grid.Column="5"></TextBox>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Label Grid.Row="2">Time Remaining:</Label>
-        <Label Grid.Row="2" Grid.Column="1" Content="{Binding TimeRemaining}"></Label>
+        <Label Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Right">Time Remaining For Week:</Label>
+        <Label Grid.Row="2" Grid.Column="2" Content="{Binding TimeRemaining}"></Label>
+        <Label Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Right">Worked Today:</Label>
+        <Label Grid.Row="2" Grid.Column="5" Content="{Binding Today}"></Label>
         <Button Grid.Row="3" Command="{Binding Command}" CommandParameter="save" >Save</Button>
         <Button Grid.Row="3" Command="{Binding Command}" CommandParameter="add" Grid.Column="1">Start Shift</Button>
         <Button Grid.Row="3" Command="{Binding Command}" CommandParameter="refresh" Grid.Column="2">Go Home</Button>
