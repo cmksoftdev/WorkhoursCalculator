@@ -150,6 +150,7 @@ namespace WorkhoursCalculator
         public void ImportCsv()
         {
             repository.ImportCsv();
+            save = true;
             Days = new ObservableCollection<Day>(repository.Days);
         }
 
