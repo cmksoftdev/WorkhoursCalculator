@@ -44,7 +44,7 @@
         <Label Grid.Row="1">Time Remaining:</Label>
         <Label Grid.Row="1" Grid.Column="1" Content="{Binding TimeRemaining}"></Label>
         <Button Grid.Row="2" Command="{Binding Command}" CommandParameter="save" >Save</Button>
-        <Button Grid.Row="2" Command="{Binding Command}" CommandParameter="add" Grid.Column="1">Add Day</Button>
+        <Button Grid.Row="2" Command="{Binding Command}" CommandParameter="add" Grid.Column="1">Start Shift</Button>
         <Button Grid.Row="2" Command="{Binding Command}" CommandParameter="refresh" Grid.Column="2">Go Home</Button>
         <Button Grid.Row="2" Command="{Binding Command}" CommandParameter="csv" Grid.Column="3">Create CSV</Button>
         <Button Grid.Row="2" Command="{Binding Command}" CommandParameter="load" Grid.Column="4">Load</Button>
