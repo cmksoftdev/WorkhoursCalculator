@@ -8,6 +8,7 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="30"></RowDefinition>
             <RowDefinition Height="20"></RowDefinition>
@@ -18,35 +19,45 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <ListView Grid.ColumnSpan="5" ItemsControl.ItemsSource="{Binding Days}" HorizontalContentAlignment="Stretch">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid HorizontalAlignment="Stretch" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="{Binding DateString}" Grid.Column="0"></Label>
-                        <Label Content="{Binding StartString}" Grid.Column="1"></Label>
-                        <Label Content="{Binding EndeString}" Grid.Column="2"></Label>
-                    <Label Content="{Binding Pause}" Grid.Column="3"></Label>
-                    <Label Content="{Binding WorkHours}" Grid.Column="4"></Label>
-                    <Label Content="{Binding Work}" Grid.Column="5"></Label>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
+        <Label></Label>
+        <Label Grid.Column="0">Date:</Label>
+        <Label Grid.Column="1">Start:</Label>
+        <Label Grid.Column="2">End:</Label>
+        <Label Grid.Column="3">Pause:</Label>
+        <Label Grid.Column="4">Workhours:</Label>
+        <Label Grid.Column="5">Work:</Label>
+        <ListView Grid.Row="1" Grid.ColumnSpan="6" ItemsControl.ItemsSource="{Binding Days}" HorizontalContentAlignment="Stretch">
+            <ListView.ItemTemplate>
+                
+                <DataTemplate>
+                    
+                    <Grid HorizontalAlignment="Stretch" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Foreground="DarkBlue" Text="{Binding DateString}" Grid.Column="0"></TextBlock>
+                        <TextBlock Foreground="DarkRed" Text="{Binding StartString}" Grid.Column="1"></TextBlock>
+                        <TextBlock Foreground="DarkBlue" Text="{Binding EndeString}" Grid.Column="2"></TextBlock>
+                        <TextBlock Foreground="DarkRed" Text="{Binding Pause}" Grid.Column="3"></TextBlock>
+                        <TextBlock Foreground="DarkBlue" Text="{Binding WorkHours}" Grid.Column="4"></TextBlock>
+                        <Label Content="{Binding Work}" Grid.Column="5"></Label>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
-        <Label Grid.Row="1">Time Remaining:</Label>
-        <Label Grid.Row="1" Grid.Column="1" Content="{Binding TimeRemaining}"></Label>
-        <Button Grid.Row="2" Command="{Binding Command}" CommandParameter="save" >Save</Button>
-        <Button Grid.Row="2" Command="{Binding Command}" CommandParameter="add" Grid.Column="1">Start Shift</Button>
-        <Button Grid.Row="2" Command="{Binding Command}" CommandParameter="refresh" Grid.Column="2">Go Home</Button>
-        <Button Grid.Row="2" Command="{Binding Command}" CommandParameter="csv" Grid.Column="3">Create CSV</Button>
-        <Button Grid.Row="2" Command="{Binding Command}" CommandParameter="load" Grid.Column="4">Load</Button>
+        <Label Grid.Row="2">Time Remaining:</Label>
+        <Label Grid.Row="2" Grid.Column="1" Content="{Binding TimeRemaining}"></Label>
+        <Button Grid.Row="3" Command="{Binding Command}" CommandParameter="save" >Save</Button>
+        <Button Grid.Row="3" Command="{Binding Command}" CommandParameter="add" Grid.Column="1">Start Shift</Button>
+        <Button Grid.Row="3" Command="{Binding Command}" CommandParameter="refresh" Grid.Column="2">Go Home</Button>
+        <Button Grid.Row="3" Command="{Binding Command}" CommandParameter="csv" Grid.Column="3">Create CSV</Button>
+        <Button Grid.Row="3" Command="{Binding Command}" CommandParameter="load" Grid.Column="4">Load</Button>
     </Grid>
 </Window>
