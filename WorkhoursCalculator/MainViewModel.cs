@@ -16,7 +16,17 @@ namespace WorkhoursCalculator
         private readonly WorkHoursRepository repository;
         private bool save = true;
 
-        public string Title => "Workhours Calculator " + (save ? " saved" : " UNSAVED DATA!");
+        private bool _save
+        {
+            get { return save; }
+            set
+            {
+                save = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
+
+        public string Title => "Workhours Calculator " + (_save ? " saved" : " UNSAVED DATA!");
 
         public MainViewModel(WorkHoursRepository repository, Config config)
         {
@@ -42,14 +52,13 @@ namespace WorkhoursCalculator
         public ObservableCollection<Day> days;
         public ObservableCollection<Day> Days
         {
-            get => days;
+            get { return days; }
             set
             {
                 if (value != null && value != days)
                 {
                     days = value;
                     OnPropertyChanged(nameof(Days));
-                    OnPropertyChanged(nameof(Title));
                 }
             }
         }
@@ -89,31 +98,31 @@ namespace WorkhoursCalculator
 
         public void Save()
         {
-            save = false;
-            OnPropertyChanged(nameof(Title));
+            _save = true;
             repository.Save();
         }
 
         public void GoHome()
         {
-            //repository.Load();
             repository.Days.ForEach(x =>
             {
                 if (x.End == null)
                     x.End = DateTime.Now;
             });
-            save = false;
+            _save = false;
             Days = new ObservableCollection<Day>(repository.Days);
         }
+
         public void Refresh()
         {
             OnPropertyChanged(nameof(TimeRemaining));
             OnPropertyChanged(nameof(Today));
         }
+
         public void Load()
         {
             repository.Load();
-            save = true;
+            _save = true;
             Days = new ObservableCollection<Day>(repository.Days);
             OnPropertyChanged(nameof(TimeRemaining));
             OnPropertyChanged(nameof(Today));
@@ -138,7 +147,7 @@ namespace WorkhoursCalculator
         public void Add()
         {
             repository.Days.Add(new Day { Date = DateTime.Now, Start=DateTime.Now });
-            save = false;
+            _save = false;
             Days = new ObservableCollection<Day>(repository.Days);
         }
 
@@ -150,7 +159,7 @@ namespace WorkhoursCalculator
         public void ImportCsv()
         {
             repository.ImportCsv();
-            save = true;
+            _save = true;
             Days = new ObservableCollection<Day>(repository.Days);
         }
 

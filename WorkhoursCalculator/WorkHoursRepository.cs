@@ -26,11 +26,11 @@ namespace WorkhoursCalculator
                 using (var file = File.CreateText(config.CsvFilePath))
                 {
                     TimeSpan fulltime = TimeSpan.Zero;
-                    file.WriteLine($"Datum,Gekommen,Gegangen,Arbeit,Pausenzeit,Arbeitszeit,Gesamt");
+                    file.WriteLine($"Datum;Gekommen;Gegangen;Pausenzeit;Arbeitszeit;Gesamt;Arbeit;Notizen");
                     foreach (var day in Days)
                     {
                         fulltime += day.WorkHours;
-                        file.WriteLine($"{day.DateString},{day.StartString},{day.EndeString},{day.Work},{day.Pause},{day.WorkHours},{fulltime}");
+                        file.WriteLine($"{day.DateString};{day.StartString};{day.EndeString};{day.Pause};{day.WorkHours};{fulltime};{day.Work};{day.Note}");
                     }
                 }
             }
@@ -51,14 +51,15 @@ namespace WorkhoursCalculator
                 Days = new List<Day>();
                 foreach (var line in csv)
                 {
-                    var values = line.Split(',');
+                    var values = line.Split(';');
                     Days.Add(new Day
                     {
                         Date = DateTime.Parse(values[0]),
                         Start = DateTime.Parse(values[1]),
                         End = values[2] == "---" ? (DateTime?)null : DateTime.Parse(values[2]),
-                        Work = values[3],
-                        Pause = TimeSpan.Parse(values[4]),
+                        Pause = TimeSpan.Parse(values[3]),
+                        Work = values[6],
+                        Note = values[7],
                     });
                 }
                 Save();

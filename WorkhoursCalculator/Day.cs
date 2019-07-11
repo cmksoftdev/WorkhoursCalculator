@@ -10,6 +10,7 @@ namespace WorkhoursCalculator
     {
         public DateTime Date { get; set; }
         public string Work { get; set; }
+        public string Note { get; set; }
         public DateTime Start { get; set; }
         public DateTime? End { get; set; }
         public DateTime Ende => End != null ? End.Value : DateTime.Now;

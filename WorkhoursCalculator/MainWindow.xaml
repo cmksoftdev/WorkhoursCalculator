@@ -43,12 +43,17 @@
                             <ColumnDefinition Width="*"></ColumnDefinition>
                             <ColumnDefinition Width="*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"></RowDefinition>
+                            <RowDefinition Height="30"></RowDefinition>
+                        </Grid.RowDefinitions>
                         <TextBlock Foreground="DarkBlue" Text="{Binding DateString}" Grid.Column="0"></TextBlock>
                         <TextBlock Foreground="DarkRed" Text="{Binding StartString}" Grid.Column="1"></TextBlock>
                         <TextBlock Foreground="DarkBlue" Text="{Binding EndeString}" Grid.Column="2"></TextBlock>
                         <TextBlock Foreground="DarkRed" Text="{Binding Pause}" Grid.Column="3"></TextBlock>
                         <TextBlock Foreground="DarkBlue" Text="{Binding WorkHoursString}" Grid.Column="4"></TextBlock>
                         <TextBox Text="{Binding Work}" Grid.Column="5"></TextBox>
+                        <TextBox Text="{Binding Note}" Grid.Row="2" Grid.ColumnSpan="6"></TextBox>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
